@@ -26,7 +26,9 @@
               </div>
             </div>
           </div>
+          <arr-recipes></arr-recipes>
         </div>
+        
       </div>
   </div>
 </template>
@@ -34,12 +36,16 @@
 <script>
 import logBtn from './components/logBtn.vue'
 import searchIngredients from './components/searchIngredients.vue'
+import arrRecipes from './components/arrRecipes.vue'
+
 export default {
   name: 'App',
   components: {
     logBtn,
-    searchIngredients
-  }
+    searchIngredients,
+    arrRecipes
+  },
+  
 }
 </script>
 
