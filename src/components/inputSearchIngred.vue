@@ -5,7 +5,9 @@
         'border-red-400': checkProducts,
         'border-opacity-100': checkProducts
     }"
+    
     class="w-full flex items-center px-4  bg-white rounded-3xl h-12 border border-black border-opacity-25 shadow-lg">
+    <!-- <h1 v-for="item in items" :key="item">{{item.product_name}}</h1> -->
         <img src="../assets/search.png" :style="{
             height: `20px`,
             width: `20px`,
@@ -17,79 +19,54 @@
         :placeholder="!checkProducts ? 'Введите ингредиент' : 'Данный ингредиент отсутствует'" 
         >
         <button 
-        @click="addProdBtn"
+        @click="saveProdBtn()"
         class="bg-yellow-500 w-28 h-6 rounded-3xl ">Добавить</button>
         
     </div>
     <div 
     v-if="search != ''"
-    class="flex justify-evenly bg-white py-1.5 border border-black border-opacity-25 rounded-b-3xl"
+    class="flex justify-evenly flex-wrap bg-white h-20 py-1.5 border border-black border-opacity-25 rounded-b-3xl"
     >
         <h1 
         @click="saveItemFromData(item.product_name)"
-        v-for="(item, name, index) in filterProducts.slice(0,4)" :key="index" 
+        v-for="(item, name, index) in filterProducts.slice(0, 8)" :key="index" 
         class="border border-black border-opacity-25 rounded-3xl bg-yellow-500 px-3 h-6 cursor-pointer">{{item.product_name}}</h1>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+import { mapState } from 'vuex';
 export default {
     data() {
         return {
-            arrProds: [],
-            saveArrIngred: [],
 
             search: '',
             checkProducts: false
         }
     },
-    emits:['saveProductForEmit'],
 
     methods: {
-        searchInData() {
-            axios.get('http://localhost/api.php')
-            .then(response => {
-                this.arrProds = response.data
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        },
 
-        addProdBtn() {
-            this.saveArrIngred.push(this.search)
+        saveProdBtn() {
+            this.$store.state.filteredProducts.push(this.search)
             this.search = ''
         },
 
         saveItemFromData(el) {
-            this.saveArrIngred.push(el) 
+            this.$store.state.filteredProducts.push(el) 
             this.search = ''
-        },
-
-        saveProductForEmit() {
-            this.$emit('saveProductForEmit', this.saveArrIngred)
         },
         
     },
     computed: {
         filterProducts() {
-            return this.arrProds.filter(item => item.product_name.includes(this.search))
-        }
-    },
-    watch: {
-        saveArrIngred: {
-            handler() {
-                this.saveProductForEmit()
-            },
-            deep: true 
+            return this.$store.getters.filterProducts(this.search)
         },
-        search() {
-            this.filterProducts    
-        }
+        ...mapState(['items']),
+        
     },
     created() {
-        this.searchInData()
+        this.$store.dispatch('loadItems')
     }
     
 }

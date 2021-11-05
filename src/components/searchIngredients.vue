@@ -4,10 +4,10 @@
             <h1 class="sm:text-2xl p-4 font-medium">Поиск по ингредиентам</h1>
         </div>
         <div class="flex flex-col bg-gray-200 w-full vsm:h-full xl:h-90 rounded-3xl rounded-br-none xl:px-14 xl:pt-12">
-            <input-search-ingred @saveProductForEmit="saveProduct"></input-search-ingred>
+            <input-search-ingred></input-search-ingred>
             <div class="w-full flex justify-between sm:mt-10">
                 
-                <list-ingred :data-ingreds="arr"></list-ingred>
+                <list-ingred></list-ingred>
                 <cooking-time></cooking-time>
                 <restrictions-food></restrictions-food>
             </div>
@@ -28,15 +28,8 @@ export default {
         CookingTime,
         RestrictionsFood
     },
-    emits: ['saveProductForEmit'],
     data() {
         return {
-            arr: []
-        }
-    },
-    methods: {
-        saveProduct(f) {
-            this.arr = f
         }
     }
 }
