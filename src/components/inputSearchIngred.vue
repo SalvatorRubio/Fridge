@@ -7,14 +7,12 @@
     }"
     
     class="w-full flex items-center px-4  bg-white rounded-3xl h-12 border border-black border-opacity-25 shadow-lg">
-    <!-- <h1 v-for="item in items" :key="item">{{item.product_name}}</h1> -->
         <img src="../assets/search.png" :style="{
             height: `20px`,
             width: `20px`,
         }" alt="">
         <input type="text" 
         v-model="search" 
-        
         class="border-none  w-full mr-3 py-1 px-2 leading-tight focus:outline-none focus:ring-0 focus:border-white"
         :placeholder="!checkProducts ? 'Введите ингредиент' : 'Данный ингредиент отсутствует'" 
         >
@@ -37,7 +35,7 @@
 <script>
 import { mapState } from 'vuex';
 export default {
-    data() {
+    data() { 
         return {
 
             search: '',
@@ -48,8 +46,10 @@ export default {
     methods: {
 
         saveProdBtn() {
-            this.$store.state.filteredProducts.push(this.search)
-            this.search = ''
+            if(this.search != '') {
+                this.$store.state.filteredProducts.push(this.search)
+                this.search = ''
+            }
         },
 
         saveItemFromData(el) {

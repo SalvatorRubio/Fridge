@@ -8,7 +8,7 @@ module.exports = {
       }
     },
     fontFamily: {
-      'sans': ['Roboto'],
+      'sans': ['Roboto']
     },
     screens: {
       'vsm': '320px',

@@ -3,6 +3,7 @@ import App from './App'
 import './tailwind.css'
 import { createStore } from 'vuex'
 import axios from 'axios'
+import router from './router/index.js'
 
 
 const store = createStore({
@@ -40,4 +41,4 @@ const store = createStore({
 
 });
 
-createApp(App).use(store).mount('#app')
+createApp(App).use(store).use(router).mount('#app')
