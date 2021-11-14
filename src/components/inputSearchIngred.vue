@@ -26,14 +26,13 @@
     class="flex justify-evenly flex-wrap bg-white h-20 py-1.5 border border-black border-opacity-25 rounded-b-3xl"
     >
         <h1 
-        @click="saveItemFromData(item.product_name)"
-        v-for="(item, name, index) in filterProducts.slice(0, 8)" :key="index" 
-        class="border border-black border-opacity-25 rounded-3xl bg-yellow-500 px-3 h-6 cursor-pointer">{{item.product_name}}</h1>
+        @click="saveItemFromData(item)"
+        v-for="(item, index) in filterProducts.slice(0, 6)" :key="index" 
+        class="border border-black border-opacity-25 rounded-3xl bg-yellow-500 px-5 h-6 cursor-pointer">{{item}}</h1>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
 export default {
     data() { 
         return {
@@ -61,12 +60,12 @@ export default {
     computed: {
         filterProducts() {
             return this.$store.getters.filterProducts(this.search)
+            
         },
-        ...mapState(['items']),
         
     },
     created() {
-        this.$store.dispatch('loadItems')
+        this.$store.dispatch('loadProducts')
     }
     
 }

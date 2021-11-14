@@ -1,12 +1,12 @@
 <template>
-    <div class="flex flex-col">
+    <div class="flex flex-col ">
         <h1 class="text-lg">Ингредиенты вашего блюда:</h1>
         <div class="flex flex-wrap items-center justify-between mt-4">
             <div 
             v-for="item in ingredients"
             :key="item"
             class="flex items-center mr-0.5 w-52 my-2">
-            <input class="mr-3" type="checkbox" name="" checked disabled>
+            <input class="mr-3 bg-transparent text-black" type="checkbox" checked disabled>
             {{item.name}} - {{item.number}}
             </div>
         </div>

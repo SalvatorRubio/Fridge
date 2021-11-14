@@ -17,12 +17,12 @@
         }"
           class="mx-auto w-full mt-0 max-w-4xl relative bg-white mb-20 inset-0 shadow-2xl rounded-3xl">
           <img class="absolute -top-8 left-1/2 transform -translate-x-1/2" src="../assets/fridge.png" alt="">
-          <search-ingredients></search-ingredients>
+          <criteria-recipe></criteria-recipe>
           <div class="w-full px-10 flex justify-end">
             <div class="w-60 h-16 flex justify-center items-center bg-gray-200 rounded-b-3xl ">
-              <div class="relative flex justify-center items-center bg-yellow-500 w-52 h-12 rounded-lg cursor-pointer">
+              <div name="btn" @click="loadRecipes()" class="relative flex justify-center items-center bg-yellow-500 w-52 h-12 rounded-lg cursor-pointer">
                 <img class="absolute left-4 top-1/2 transform -translate-y-1/2" src="../assets/search.png" alt="">
-                <h1 class="font-bold uppercase pl-4 text-white text-lg">найти рецепт</h1>
+                <h1 class="font-bold uppercase pl-4 text-white text-lg" >Найти рецепт</h1>
               </div>
             </div>
           </div>
@@ -35,17 +35,23 @@
 
 <script>
 import logBtn from '../components/logBtn.vue'
-import searchIngredients from '../components/searchIngredients.vue'
+import CriteriaRecipe from '../components/CriteriaRecipe.vue'
 import arrRecipes from '../components/arrRecipes.vue'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
   components: {
     logBtn,
-    searchIngredients,
+    CriteriaRecipe,
     arrRecipes
   },
-  
+  computed: {
+    
+  },
+  methods: {
+    ...mapActions(['loadRecipes'])
+  }
 }
 </script>
 

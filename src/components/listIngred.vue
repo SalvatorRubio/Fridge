@@ -4,10 +4,10 @@
         <div class="flex flex-wrap w-52 h-36 items-center justify-center">
             <h1 
             class="text-xs opacity-40"
-            v-if="!this.$store.state.filteredProducts.length"
+            v-if="!$store.state.filteredProducts.length"
             >Ингредиенты отсутствуют</h1>
             <h1 
-            v-for="item in this.$store.state.filteredProducts"
+            v-for="item in $store.state.filteredProducts"
             :key="item"
             class="bg-yellow-500 w-80 h-5 border border-black border-opacity-30 font-light text-xs flex justify-center relative rounded-3xl m-1"
             v-else
@@ -26,16 +26,6 @@ import {mapMutations} from 'vuex'
 export default {
     methods: {
         ...mapMutations(['deleteItem']),
-        // deleteItem(el) {
-            // console.log(this.products.filter(item => item != el));
-            // console.log(this.$store.state.filteredProducts.filter(item => item != el));
-            // return this.$store.state.filteredProducts.filter(item => item != el)
-            // return $store.getters.deleteItem(el)
-            // console.log(this.dataIngreds);
-            // 
-            // 
-            // 
-        // },
     }
 }
 

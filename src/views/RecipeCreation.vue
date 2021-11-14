@@ -16,7 +16,7 @@
             class="mx-auto w-full mt-0 max-w-4xl relative bg-white mb-20 inset-0 shadow-2xl rounded-3xl">
                 <img class="absolute -top-8 left-1/2 transform -translate-x-1/2" src="../assets/fridge.png" alt="">
                 <nav-recipe></nav-recipe>
-                <recipe-info></recipe-info>
+                <input-data-recipe></input-data-recipe>
             </div>
         </div>
     </div>
@@ -25,21 +25,13 @@
 <script>
 import logBtn from '../components/logBtn.vue'
 import navRecipe from '../components/NavRecipe.vue'
-import RecipeInfo from '../components/RecipeInfo.vue'
+import InputDataRecipe from '../components/InputDataRecipe.vue'
 
 export default {
-  components: {
-    logBtn,
-    navRecipe,
-    RecipeInfo
-  },
-  
+    components: {
+        logBtn,
+        navRecipe,
+        InputDataRecipe
+    }
 }
 </script>
-
-<style>
-.intro {
-  background: url('../assets/intro.png') no-repeat center;
-  background-size: cover;
-}
-</style>

@@ -1,0 +1,52 @@
+select product_name from products where product_id not in(select distinct(product_id) from prodinlim where limit_id = 1) 
+
+SELECT name, cooking_time from recipes WHERE recipes_id in (SELECT recipes_id FROM prodinrec 
+WHERE product_id in (SELECT products.product_id from products WHERE product_name in('Хлеб черный')
+ and product_id not in(select distinct(product_id) from prodinlim where limit_id = 1))) and cooking_time > 60;
+
+
+SELECT name from recipes WHERE recipes_id in (SELECT recipes_id FROM prodinrec WHERE product_id in (SELECT products.product_id from products WHERE product_name in( 'Молоко', 'Курица')));
+SELECT name, cooking_time from recipes WHERE recipes_id 
+
+in (SELECT recipes_id FROM prodinrec WHERE product_id in (SELECT products.product_id from products WHERE product_name in('Курица'))) and cooking_time > 60;
+
+
+
+SELECT name, cooking_time, image from recipes, recipe_images WHERE recipes.recipes_id in (SELECT recipes_id FROM prodinrec 
+WHERE product_id in (SELECT products.product_id from products WHERE product_name in('Хлеб черный'))) and cooking_time < 60 and 
+(select recipes_id from recipe_images WHERE recipes_id = recipes.recipes_id);
+
+//Правильный
+$sql = "SELECT name, cooking_time, image from recipes, recipe_images WHERE"; 
+if($_POST['rec'] && !$_POST['lim']) {
+    $sql .= "recipes.recipes_id in (SELECT recipes_id FROM prodinrec WHERE product_id in (SELECT products.product_id from products WHERE product_name in (".$_POST['rec'].")))";
+} elseif($_POST['rec'] && $_POST['lim']) {
+    $sql .= "recipes.recipes_id in (SELECT recipes_id FROM prodinrec WHERE product_id in (SELECT products.product_id from products WHERE product_name in (".$_POST['rec'].")";
+    $sql .= "and product_id not in(select distinct(product_id) from prodinlim where limit_id in (".$_POST['lim']."))))";
+} else {
+    $sql .= "recipes.recipes_id = recipes.recipes_id"
+};
+
+if($_POST['lim'] && !$_POST['rec']) {
+    $sql .= "and product_id not in(select distinct(product_id) from prodinlim where limit_id in (".$_POST['lim']."))";
+} else {
+    $sql .= "and limit_id = limit_id";
+};
+
+if($_POST['time']) {
+    $sql .= "and cooking_time ".$_POST['time'];
+} else {
+    $sql .= "and cooking_time = cooking_time";
+};
+$sql .= "and recipes.recipes_id = recipe_images.recipes_id";
+
+" recipes.recipes_id in (SELECT recipes_id FROM prodinrec WHERE product_id in (SELECT products.product_id from products WHERE product_name in (".$rec.") 
+            and product_id not in(select distinct(product_id) from prodinlim where limit_id in (".$lim."))))"
+
+
+
+
+
+
+SELECT name, cooking_time, image from recipes, recipe_images WHERE recipes.recipes_id in (SELECT recipes_id FROM prodinrec 
+WHERE product_id in (SELECT products.product_id from products WHERE product_name in('Хлеб черный'))) and cooking_time < 60 and recipes.recipes_id = recipe_images.recipes_id;
