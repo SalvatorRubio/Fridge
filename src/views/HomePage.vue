@@ -7,10 +7,6 @@
         height: `1322px`
       }"
       >
-        <div class="sm:flex-col vsm:justify-evenly vsm:mb-11 mx-auto max-w-4xl w-full flex sm:items-end sm:mb-2.5">
-          <log-btn class="px-6 bg-gray-100 sm:mb-3.5">Войти</log-btn>
-          <log-btn class="px-4 bg-gray-300">Добавить рецепт</log-btn>
-        </div>
         <div
           :style="{
           height: `1106px`
@@ -34,7 +30,6 @@
 </template>
 
 <script>
-import logBtn from '../components/logBtn.vue'
 import CriteriaRecipe from '../components/CriteriaRecipe.vue'
 import arrRecipes from '../components/arrRecipes.vue'
 import { mapActions } from 'vuex'
@@ -42,7 +37,6 @@ import { mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
-    logBtn,
     CriteriaRecipe,
     arrRecipes
   },

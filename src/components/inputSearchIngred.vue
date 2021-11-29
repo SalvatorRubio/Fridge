@@ -33,10 +33,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
     data() { 
         return {
-
             search: '',
             checkProducts: false
         }
@@ -62,7 +63,7 @@ export default {
             return this.$store.getters.filterProducts(this.search)
             
         },
-        
+        ...mapState['filteredProducts']
     },
     created() {
         this.$store.dispatch('loadProducts')

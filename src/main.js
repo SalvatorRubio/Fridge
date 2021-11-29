@@ -11,15 +11,19 @@ const store = createStore({
 	state: {
         items: [],
         filteredProducts: [],
+        selectedTime: [],
+        selectedLimits: [],
         limits: [],
-        recipes: []
+        recipes: [],
+        recIngred: [],
+        recImg: [],
+        recSteps: [],
+        localStorageRecipe: []
     },
     getters: {
-        // This getter is doing live data search
         filterProducts: state => input => {
             return state.items.filter(item => item.includes(input))
-        },
-        
+        }
     },
     mutations: {
         SET_Item(state, items) {
@@ -32,7 +36,16 @@ const store = createStore({
             state.filteredProducts = state.filteredProducts.filter(item => item != el)
         },
         ShowRecipes(state, el) {
-            state.recipes = el.split(',').slice(0, -1)
+            state.recipes = el.match(/\{.+?\}/g)
+        },
+        aboutRecipe(state, el) {
+            state.recIngred = el.match(/\{.+?\}/g)
+        },
+        aboutRecipeImage(state, el) {
+            state.recImg = el.match(/\{.+?\}/g) 
+        },
+        aboutRecipeSteps(state, el) {
+            state.recSteps = el.match(/\{.+?\}/g) 
         }
     },
     actions: {
@@ -59,19 +72,61 @@ const store = createStore({
         loadRecipes ({ commit }) {
             axios.post('http://localhost/check.php',{
                 data: {
-                    rec: null,
-                    lim: null,
-                    time: null
+                    rec: this.state.filteredProducts,
+                    lim: this.state.selectedLimits,
+                    time: this.state.selectedTime
                 }
             })
-            .then(response =>  response.data)
+                .then(response => response.data)
             .then(items => {
                 commit('ShowRecipes', items)
             })
             .catch(error => {
                 console.log(error.response)
             });
-        }
+        },
+        loadIngredsRec ({ commit }, recipe) {
+            axios.post('http://localhost/recipeIngreds.php',{
+                data: {
+                    name: recipe
+                }
+            })
+                .then(response => response.data)
+            .then(items => {
+                commit('aboutRecipe', items)
+            })
+            .catch(error => {
+                console.log(error.response)
+            });
+        },
+        loadImageRec ({ commit }, recipe) {
+            axios.post('http://localhost/recImage.php',{
+                data: {
+                    name: recipe
+                }
+            })
+                .then(response => response.data)
+            .then(items => {
+                commit('aboutRecipeImage', items)
+            })
+            .catch(error => {
+                console.log(error.response)
+            });
+        },
+        loadStepsRec ({ commit }, recipe) {
+            axios.post('http://localhost/recSteps.php',{
+                data: {
+                    name: recipe
+                }
+            })
+                .then(response => response.data)
+            .then(items => {
+                commit('aboutRecipeSteps', items)
+            })
+            .catch(error => {
+                console.log(error.response)
+            });
+        },
     }
 
 });

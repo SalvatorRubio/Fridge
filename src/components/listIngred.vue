@@ -22,10 +22,14 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+
+import {mapMutations, mapState} from 'vuex'
 export default {
     methods: {
         ...mapMutations(['deleteItem']),
+    },
+    computed: {
+        ...mapState(['filteredProducts'])
     }
 }
 

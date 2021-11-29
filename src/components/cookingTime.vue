@@ -33,28 +33,33 @@ export default {
                     'textBefore': 'до',
                     'textNum': '20',
                     'textTime': 'минут',
-                    'id': '1'
+                    'id': '1',
+                    'dataToAxios': '< 20'
                 },
                 {
                     'imgName': require('../assets/cookingTime/30minutes.png'),
                     'textBefore': 'до',
                     'textNum': '30',
                     'textTime': 'минут',
-                    'id': '2'
+                    'id': '2',
+                    'dataToAxios': '< 30'
+                    
                 },
                 {
                     'imgName': require('../assets/cookingTime/1hour.png'),
                     'textBefore': 'до',
                     'textNum': '60',
                     'textTime': 'минут',
-                    'id': '3'
+                    'id': '3',
+                    'dataToAxios': '< 60'
                 },
                 {
                     'imgName': require('../assets/cookingTime/1hour.png'),
                     'textBefore': 'более',
                     'textNum': '1',
                     'textTime': 'часа',
-                    'id': '4'
+                    'id': '4',
+                    'dataToAxios': '> 60'
                 }
             ],
             elTime: null
@@ -62,7 +67,9 @@ export default {
     },
     methods: {
         changeTime(el) {
+            // console.log(el.dataToAxios);
             this.elTime = el
+            this.$store.state.selectedTime = [` ${el.dataToAxios} `]
         }
     }
 }

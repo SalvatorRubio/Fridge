@@ -1,19 +1,10 @@
 <template>
      <div class="flex flex-col justify-center items-center mt-3 lg:mx-10 vsm:mx-5">
         <div class="bg-gray-200 rounded-t-3xl shadow-2xl border border-b-0 border-gray-400 flex flex-col items-center">
-            <h1 class="text-2xl py-4 px-14 font-medium">{{nameRecipe}}</h1>
+            <h1 class="text-2xl py-4 px-14 font-medium">{{storageRec.name}}</h1>
             <div class="flex bg-gray-200 items-center">
                 <div class="flex items-center mx-2">
-                    <div class="rounded-full w-4 h-4 bg-gray-300 mx-1"></div>
-                    <h1>20 мин.</h1>
-                </div>
-                <div class="flex items-center mx-2">
-                    <div class="rounded-full w-4 h-4 bg-gray-300 mx-1"></div>
-                    <h1>Лёгкое</h1>
-                </div>
-                <div class="flex items-center mx-2">
-                    <div class="rounded-full w-4 h-4 bg-gray-300 mx-1"></div>
-                    <h1>5 ингр.</h1>
+                    <h1>{{storageRec.time}} минут</h1>
                 </div>
             </div>
         </div>
@@ -39,8 +30,11 @@ export default {
     },
     data() {
         return {
-            nameRecipe: 'Оливье - “Столичный”'
+            storageRec: []
         }
+    },
+    mounted() {
+        this.storageRec = JSON.parse(localStorage.getItem('recipe'))
     }
 }
 </script>

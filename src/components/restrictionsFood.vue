@@ -6,11 +6,9 @@
             class="flex items-center w-28 ml-2"
             v-for="(item, i) in limits" :key="i"
             >
-                <input  class="bg-transparent text-black" type="checkbox" name="" id="">
+                <input  class="bg-transparent text-black" :value="i+1" v-model="this.$store.state.selectedLimits" type="checkbox">
                 <h1 class="text-base pl-1">{{item}}</h1>
             </div>
-        <h1 v-for="(item, index) in d" :key="index">{{item}}</h1>
-            
         </div>
     </div>
 
@@ -26,7 +24,9 @@ export default {
         }
     },
     methods: {
-    
+        selectLimits(i) {
+            this.$store.state.selectedLimits.push(i)
+        }
     },
     computed: {
         
