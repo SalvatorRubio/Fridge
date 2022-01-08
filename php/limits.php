@@ -3,29 +3,10 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT");
 header("Access-Control-Allow-Headers: Content-Type");
 
+$user = "root";
+$pass = "";
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "fridge";
+$dbh = new PDO("mysql:host=localhost;dbname=fridge", $user, $pass);
+$stmt = $dbh->query("SELECT limit_name FROM limits");
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-};
-
-$sql1 = "SELECT limit_name FROM  limits";
-
-  $result1=$conn->query($sql1) ;
-  
-  while($row = mysqli_fetch_assoc($result1))  {
-    
-    $f = $row['limit_name']. ',';
-    echo $f;
-  };
-  
-$conn->close();
-?>
+print implode(",", $stmt->fetchAll(PDO::FETCH_COLUMN));
